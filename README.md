@@ -5,6 +5,8 @@ Una moderna y elegante aplicación web para compartir y descubrir recetas de coc
 ## ✨ Características principales
 
 - **Diseño moderno y minimalista** con animaciones sutiles
+- **Sistema de valoración** con estrellas para puntuar las recetas
+- **Visualización de recetas mejor valoradas** por la comunidad
 - **Búsqueda avanzada** por nombre, categoría o etiquetas
 - **Navegación intuitiva** entre categorías y recetas
 - **Interfaz responsiva** adaptada a todos los dispositivos
@@ -17,7 +19,7 @@ Una moderna y elegante aplicación web para compartir y descubrir recetas de coc
 La página principal presenta un diseño limpio con una sección de héroe llamativa, estadísticas destacadas, recetas populares y categorías en un formato visual moderno.
 
 ### Detalle de receta
-Cada receta muestra una imagen destacada, información clara sobre tiempo de preparación, dificultad e ingredientes, y pasos detallados para la elaboración.
+Cada receta muestra una imagen destacada, información clara sobre tiempo de preparación, dificultad e ingredientes, y pasos detallados para la elaboración. Incluye un sistema de valoración con estrellas.
 
 ### Exploración por categorías
 Navega visualmente a través de las diferentes categorías culinarias con tarjetas interactivas y atractivas.
@@ -65,6 +67,7 @@ recetaspepe/
 ├── app/                      # Directorio principal (App Router)
 │   ├── components/           # Componentes reutilizables
 │   │   ├── ui/               # Componentes UI base
+│   │   ├── recipe-rating.tsx # Componente de valoración
 │   │   └── ...               # Otros componentes
 │   ├── lib/                  # Funciones utilitarias
 │   │   ├── data.ts           # Datos de ejemplo
@@ -82,10 +85,17 @@ recetaspepe/
 
 ## 🌟 Características en detalle
 
+### Sistema de valoración
+- **Valoración con estrellas** (1-5) para cada receta
+- **Almacenamiento local** de valoraciones mediante localStorage
+- **Cálculo de valoración media** mostrada en las tarjetas de recetas
+- **Sección de mejor valoradas** en la página principal
+- **Modal interactivo** para valorar recetas fácilmente
+
 ### Página de inicio
 - **Hero section** atractiva con gradiente y elementos visuales
 - **Estadísticas rápidas** para mostrar información general
-- **Recetas destacadas** con opción para filtrar entre destacadas y recientes
+- **Recetas destacadas** con opciones para filtrar entre destacadas, recientes y mejor valoradas
 - **Exploración por categoría** con tarjetas interactivas
 - **Llamada a la acción** para la búsqueda personalizada
 
@@ -117,6 +127,7 @@ recetaspepe/
 - **Componentes UI optimizados** para rendimiento y accesibilidad
 - **Diseño responsivo** para todos los tamaños de pantalla
 - **Navegación intuitiva** con feedback visual
+- **Almacenamiento local** para guardar preferencias del usuario
 
 ## 📱 Optimización para móviles
 
@@ -127,9 +138,9 @@ La aplicación está completamente optimizada para dispositivos móviles:
 
 ## 🔮 Mejoras futuras
 
-- **Backend con base de datos** para almacenar recetas de usuarios
+- **Backend con base de datos** para almacenar recetas y valoraciones de usuarios
 - **Sistema de autenticación** para cuentas personalizadas
-- **Comentarios y valoraciones** en recetas
+- **Comentarios en recetas** para compartir experiencias y consejos
 - **Planificador de comidas** semanal
 - **Lista de compras** generada automáticamente
 
