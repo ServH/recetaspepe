@@ -416,6 +416,37 @@ export function getRecentRecipes(): Recipe[] {
   ).slice(0, 4);
 }
 
+// Función para obtener recetas mejor valoradas (client-side)
+export function getTopRatedRecipes(): Recipe[] {
+  // Esta función debe llamarse solo en el cliente
+  if (typeof window === 'undefined') {
+    return recipes.slice(0, 4);
+  }
+  
+  try {
+    const ratingsData = JSON.parse(localStorage.getItem('recipe-ratings') || '{}');
+    
+    // Calcular valoración media para cada receta
+    const ratedRecipes = recipes.map(recipe => {
+      const rating = ratingsData[recipe.id];
+      const averageRating = rating ? rating.sum / rating.count : 0;
+      return {
+        ...recipe,
+        averageRating,
+      };
+    });
+    
+    // Ordenar por valoración (de mayor a menor)
+    return ratedRecipes
+      .filter(recipe => recipe.averageRating > 0) // Solo recetas con valoraciones
+      .sort((a, b) => b.averageRating - a.averageRating)
+      .slice(0, 4); // Tomar las 4 mejor valoradas
+  } catch (error) {
+    console.error('Error al obtener las recetas mejor valoradas:', error);
+    return recipes.slice(0, 4);
+  }
+}
+
 export function getPopularTags(): { tag: string; count: number }[] {
   const tags: Record<string, number> = {};
   
