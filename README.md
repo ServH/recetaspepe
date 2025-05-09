@@ -1,48 +1,42 @@
-# Recetas de Pepe
+# 🍲 Recetas de Pepe
 
-Una aplicación web moderna para compartir y descubrir deliciosas recetas de cocina.
+Una moderna y elegante aplicación web para compartir y descubrir recetas de cocina, con una interfaz atractiva optimizada para dispositivos móviles y de escritorio.
 
-## 🍳 Características
+## ✨ Características principales
 
-- Navegación intuitiva y minimalista
-- Búsqueda avanzada por nombre, categoría o etiquetas
-- Filtros por dificultad y tiempo de preparación
-- Responsive design para dispositivos móviles y de escritorio
-- Modo oscuro para lectura cómoda
-- Interfaz limpia y elegante
+- **Diseño moderno y minimalista** con animaciones sutiles
+- **Búsqueda avanzada** por nombre, categoría o etiquetas
+- **Navegación intuitiva** entre categorías y recetas
+- **Interfaz responsiva** adaptada a todos los dispositivos
+- **Modo oscuro** integrado para mejor accesibilidad
+- **Experiencia visual atractiva** con transiciones suaves
 
-## 🛠️ Tecnologías
+## 🖥️ Capturas de pantalla
 
-- **Next.js 14** con TypeScript y App Router 
-- **Tailwind CSS** para estilos
-- **shadcn/ui** para componentes de interfaz
-- **Framer Motion** para animaciones sutiles
+### Pantalla de inicio
+La página principal presenta un diseño limpio con una sección de héroe llamativa, estadísticas destacadas, recetas populares y categorías en un formato visual moderno.
 
-## 📋 Estructura del Proyecto
+### Detalle de receta
+Cada receta muestra una imagen destacada, información clara sobre tiempo de preparación, dificultad e ingredientes, y pasos detallados para la elaboración.
 
-```
-recetaspepe/
-├── app/                      # Directorio principal de la aplicación
-│   ├── components/           # Componentes reutilizables
-│   │   ├── ui/               # Componentes de UI básicos (shadcn)
-│   │   └── ...               # Otros componentes
-│   ├── lib/                  # Utilidades y funciones auxiliares
-│   ├── types/                # Definiciones de tipos TypeScript
-│   ├── buscar/               # Página de búsqueda
-│   ├── categorias/           # Páginas de categorías
-│   ├── recetas/              # Páginas de recetas
-│   ├── globals.css           # Estilos globales
-│   ├── layout.tsx            # Layout principal
-│   └── page.tsx              # Página de inicio
-├── public/                   # Archivos estáticos (imágenes, etc.)
-├── tailwind.config.js        # Configuración de Tailwind CSS
-├── next.config.js            # Configuración de Next.js
-└── package.json              # Dependencias y scripts
-```
+### Exploración por categorías
+Navega visualmente a través de las diferentes categorías culinarias con tarjetas interactivas y atractivas.
 
-## 🚀 Instalación
+## 🛠️ Tecnologías utilizadas
 
-Para instalar y ejecutar este proyecto localmente, sigue estos pasos:
+- **Next.js 14**: Framework de React para aplicaciones web modernas
+- **TypeScript**: Tipado estático para un código más robusto
+- **Tailwind CSS**: Framework de utilidades CSS para diseño rápido y consistente
+- **Framer Motion**: Biblioteca para animaciones fluidas y profesionales
+- **shadcn/ui**: Componentes de interfaz elegantes y accesibles
+
+## 🚀 Cómo ejecutar el proyecto
+
+### Requisitos previos
+- Node.js 18.0 o superior
+- npm o yarn
+
+### Instalación y ejecución
 
 ```bash
 # Clonar el repositorio
@@ -53,49 +47,91 @@ cd recetaspepe
 
 # Instalar dependencias
 npm install
+# o con yarn
+yarn install
 
 # Iniciar el servidor de desarrollo
 npm run dev
+# o con yarn
+yarn dev
 ```
 
-Después de ejecutar estos comandos, la aplicación estará disponible en [http://localhost:3000](http://localhost:3000).
+Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver la aplicación.
 
-## 📱 Responsive Design
+## 📁 Estructura del proyecto
 
-La aplicación está completamente optimizada para:
-- Dispositivos móviles
-- Tablets
-- Ordenadores de escritorio
+```
+recetaspepe/
+├── app/                      # Directorio principal (App Router)
+│   ├── components/           # Componentes reutilizables
+│   │   ├── ui/               # Componentes UI base
+│   │   └── ...               # Otros componentes
+│   ├── lib/                  # Funciones utilitarias
+│   │   ├── data.ts           # Datos de ejemplo
+│   │   └── utils.ts          # Utilidades generales
+│   ├── types/                # Definiciones TypeScript
+│   ├── buscar/               # Página de búsqueda
+│   ├── categorias/           # Páginas de categorías
+│   ├── recetas/              # Páginas de recetas
+│   ├── globals.css           # Estilos globales
+│   ├── layout.tsx            # Layout principal
+│   └── page.tsx              # Página de inicio
+├── public/                   # Archivos estáticos
+└── ...                       # Archivos de configuración
+```
 
-## 🎨 Tema Oscuro
+## 🌟 Características en detalle
 
-Para activar el tema oscuro:
-1. Haz clic en el botón de tema en la barra de navegación
-2. O configúralo para que siga el tema de tu sistema operativo
+### Página de inicio
+- **Hero section** atractiva con gradiente y elementos visuales
+- **Estadísticas rápidas** para mostrar información general
+- **Recetas destacadas** con opción para filtrar entre destacadas y recientes
+- **Exploración por categoría** con tarjetas interactivas
+- **Llamada a la acción** para la búsqueda personalizada
 
-## 📝 Funcionalidades
+### Recetas
+- **Tarjetas de receta** con efecto hover y transiciones suaves
+- **Vista detallada** con imágenes destacadas y fondo con degradado
+- **Ingredientes y pasos** visualmente diferenciados
+- **Etiquetas interactivas** para encontrar recetas relacionadas
+- **Funcionalidad de guardado, compartir e imprimir**
 
-- **Explorar recetas**: Navega por todas las recetas disponibles
-- **Buscar recetas**: Busca por nombre, ingredientes o etiquetas
-- **Filtrar por categoría**: Encuentra recetas por tipo de plato
-- **Ver detalles**: Instrucciones paso a paso, ingredientes y tiempo de preparación
-- **Explorar etiquetas**: Descubre recetas relacionadas por etiquetas
+### Categorías
+- **Navegación visual** con tarjetas interactivas para cada categoría
+- **Listado de recetas por categoría** con diseño responsivo
+- **Animaciones** para mejorar la experiencia de usuario
 
-## 🧩 Extensibilidad
+### Sistema de búsqueda
+- **Búsqueda por texto** para encontrar recetas por nombre o ingredientes
+- **Filtrado por etiquetas** para refinar resultados
+- **Visualización clara** de los resultados de búsqueda
 
-El proyecto está diseñado para ser fácilmente extensible:
+### Tema oscuro
+- Soporte completo para **modo claro y oscuro**
+- Paleta de colores cálida que mantiene la identidad visual en ambos modos
+- **Transiciones suaves** entre temas
 
-- Añadir nuevas recetas en `app/lib/data.ts`
-- Personalizar estilos en `tailwind.config.js`
-- Añadir nuevas páginas siguiendo la estructura del App Router
+## 🔍 Funcionalidades adicionales
 
-## 🔮 Mejoras Futuras
+- **Animaciones de carga** con Framer Motion para mejorar la experiencia visual
+- **Componentes UI optimizados** para rendimiento y accesibilidad
+- **Diseño responsivo** para todos los tamaños de pantalla
+- **Navegación intuitiva** con feedback visual
 
-- Implementación de backend con base de datos real
-- Sistema de autenticación para añadir recetas personalizadas
-- Función para guardar recetas favoritas
-- Función de compartir en redes sociales
-- Sistema de valoración y comentarios en recetas
+## 📱 Optimización para móviles
+
+La aplicación está completamente optimizada para dispositivos móviles:
+- Menú hamburguesa en pantallas pequeñas
+- Diseño adaptativo para diferentes tamaños de pantalla
+- Interacciones optimizadas para pantallas táctiles
+
+## 🔮 Mejoras futuras
+
+- **Backend con base de datos** para almacenar recetas de usuarios
+- **Sistema de autenticación** para cuentas personalizadas
+- **Comentarios y valoraciones** en recetas
+- **Planificador de comidas** semanal
+- **Lista de compras** generada automáticamente
 
 ## 📄 Licencia
 
