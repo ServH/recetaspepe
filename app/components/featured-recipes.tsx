@@ -1,18 +1,61 @@
-import { getRecipes } from "@/lib/data";
-import RecipeCard from "./recipe-card";
+"use client";
 
-export default function FeaturedRecipes() {
-  // Obtener recetas
-  const recipes = getRecipes();
+import { useState, useEffect } from 'react';
+import { getRecipes, getRecentRecipes } from "@/lib/data";
+import RecipeCard from "./recipe-card";
+import { motion } from "framer-motion";
+
+interface FeaturedRecipesProps {
+  activeTab?: string;
+}
+
+export default function FeaturedRecipes({ activeTab = "destacadas" }: FeaturedRecipesProps) {
+  const [recipes, setRecipes] = useState([]);
   
-  // Mostrar 6 recetas destacadas o todas si hay menos de 6
-  const featuredRecipes = recipes.slice(0, 6);
+  useEffect(() => {
+    // Usar los datos según la pestaña activa
+    if (activeTab === "recientes") {
+      setRecipes(getRecentRecipes());
+    } else {
+      // Para las destacadas, tomamos 4 recetas aleatorias
+      const allRecipes = getRecipes();
+      const shuffled = [...allRecipes].sort(() => 0.5 - Math.random());
+      setRecipes(shuffled.slice(0, 4));
+    }
+  }, [activeTab]);
+
+  // Animaciones para la grilla
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+  
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+  };
 
   return (
-    <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-      {featuredRecipes.map((recipe) => (
-        <RecipeCard key={recipe.id} recipe={recipe} />
+    <motion.div 
+      className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
+      variants={container}
+      initial="hidden"
+      animate="show"
+    >
+      {recipes.map((recipe, index) => (
+        <motion.div 
+          key={`${recipe.id}-${index}`} 
+          variants={item}
+          className="h-full"
+        >
+          <RecipeCard recipe={recipe} />
+        </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 }
