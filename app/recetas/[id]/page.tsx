@@ -8,8 +8,9 @@ import { Badge } from '@/components/ui/badge';
 import { getRecipe, getRecipesByTag } from '@/lib/data';
 import { formatTime, getDifficultyColor, getCategoryColor } from '@/lib/utils';
 import RecipeCard from '@/components/recipe-card';
+import RecipeRating from '@/components/recipe-rating';
 import { Button } from '@/components/ui/button';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 interface RecipeDetailPageProps {
@@ -21,10 +22,35 @@ interface RecipeDetailPageProps {
 export default function RecipeDetailPage({ params }: RecipeDetailPageProps) {
   const recipe = getRecipe(params.id);
   const [saved, setSaved] = useState(false);
+  const [hasRated, setHasRated] = useState(false);
+  const [showRatingModal, setShowRatingModal] = useState(false);
+  const [ratingChanged, setRatingChanged] = useState(false);
 
   if (!recipe) {
     notFound();
   }
+
+  useEffect(() => {
+    // Verificar si el usuario ya ha valorado esta receta
+    try {
+      const savedRating = localStorage.getItem(`recipe-rating-${recipe.id}`);
+      if (savedRating) {
+        setHasRated(true);
+      }
+    } catch (error) {
+      console.error('Error al cargar la valoración:', error);
+    }
+
+    // Verificar si el usuario ha guardado esta receta
+    try {
+      const savedRecipes = JSON.parse(localStorage.getItem('saved-recipes') || '[]');
+      if (savedRecipes.includes(recipe.id)) {
+        setSaved(true);
+      }
+    } catch (error) {
+      console.error('Error al cargar recetas guardadas:', error);
+    }
+  }, [recipe.id]);
 
   // Obtener recetas relacionadas por etiquetas
   const relatedRecipes = getRecipesByTag(recipe.tags[0] || '')
@@ -32,7 +58,23 @@ export default function RecipeDetailPage({ params }: RecipeDetailPageProps) {
     .slice(0, 3);
 
   const handleSave = () => {
-    setSaved(!saved);
+    try {
+      const savedRecipes = JSON.parse(localStorage.getItem('saved-recipes') || '[]');
+      
+      if (saved) {
+        // Eliminar de guardados
+        const updatedSaved = savedRecipes.filter((id: string) => id !== recipe.id);
+        localStorage.setItem('saved-recipes', JSON.stringify(updatedSaved));
+      } else {
+        // Añadir a guardados
+        savedRecipes.push(recipe.id);
+        localStorage.setItem('saved-recipes', JSON.stringify(savedRecipes));
+      }
+      
+      setSaved(!saved);
+    } catch (error) {
+      console.error('Error al guardar la receta:', error);
+    }
   };
 
   const handlePrint = () => {
@@ -50,6 +92,22 @@ export default function RecipeDetailPage({ params }: RecipeDetailPageProps) {
       navigator.clipboard.writeText(window.location.href);
       alert('Enlace copiado al portapapeles');
     }
+  };
+
+  const handleRatingClick = () => {
+    setShowRatingModal(true);
+  };
+
+  const handleRatingChange = () => {
+    setRatingChanged(true);
+    setHasRated(true);
+    
+    // Ocultar el modal después de un breve tiempo
+    setTimeout(() => {
+      setShowRatingModal(false);
+      // Resetear el estado para futuras valoraciones
+      setTimeout(() => setRatingChanged(false), 500);
+    }, 1000);
   };
     
   return (
@@ -94,6 +152,17 @@ export default function RecipeDetailPage({ params }: RecipeDetailPageProps) {
               <Users className="h-4 w-4" />
               <span>{recipe.servings} raciones</span>
             </div>
+            
+            {/* Valoración media */}
+            <div className="flex items-center gap-2 text-white bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-full">
+              <RecipeRating
+                recipeId={recipe.id}
+                size="sm"
+                readOnly={true}
+                showAverage={true}
+                className="text-white"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -102,36 +171,48 @@ export default function RecipeDetailPage({ params }: RecipeDetailPageProps) {
       <div className="container px-4 py-8 mx-auto">
         <div className="max-w-5xl mx-auto">
           {/* Botones de acción */}
-          <div className="flex justify-end mb-8 gap-2">
-            <Button 
-              variant="outline" 
-              size="sm" 
+          <div className="flex justify-between mb-8">
+            <Button
+              variant="outline"
+              size="sm"
               className="rounded-full"
-              onClick={handleSave}
+              onClick={handleRatingClick}
             >
-              <Bookmark className={`h-4 w-4 mr-2 ${saved ? 'fill-primary' : ''}`} />
-              {saved ? 'Guardada' : 'Guardar'}
+              <Star className="h-4 w-4 mr-2" />
+              {hasRated ? 'Modificar valoración' : 'Valorar receta'}
             </Button>
             
-            <Button 
-              variant="outline" 
-              size="sm" 
-              className="rounded-full"
-              onClick={handlePrint}
-            >
-              <Printer className="h-4 w-4 mr-2" />
-              Imprimir
-            </Button>
-            
-            <Button 
-              variant="outline" 
-              size="sm" 
-              className="rounded-full"
-              onClick={handleShare}
-            >
-              <Share2 className="h-4 w-4 mr-2" />
-              Compartir
-            </Button>
+            <div className="flex gap-2">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="rounded-full"
+                onClick={handleSave}
+              >
+                <Bookmark className={`h-4 w-4 mr-2 ${saved ? 'fill-primary' : ''}`} />
+                {saved ? 'Guardada' : 'Guardar'}
+              </Button>
+              
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="rounded-full"
+                onClick={handlePrint}
+              >
+                <Printer className="h-4 w-4 mr-2" />
+                Imprimir
+              </Button>
+              
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="rounded-full"
+                onClick={handleShare}
+              >
+                <Share2 className="h-4 w-4 mr-2" />
+                Compartir
+              </Button>
+            </div>
           </div>
           
           <div className="grid gap-12 md:grid-cols-7 mb-12">
@@ -251,6 +332,81 @@ export default function RecipeDetailPage({ params }: RecipeDetailPageProps) {
           )}
         </div>
       </div>
+      
+      {/* Modal de valoración */}
+      {showRatingModal && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center print:hidden">
+          <motion.div 
+            className="bg-white dark:bg-gray-900 rounded-xl p-6 max-w-md w-full mx-4"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+          >
+            <h3 className="text-xl font-semibold mb-4 text-center">
+              {ratingChanged ? '¡Gracias por tu valoración!' : 'Valora esta receta'}
+            </h3>
+            
+            {!ratingChanged ? (
+              <>
+                <p className="text-muted-foreground text-center mb-6">
+                  Tu opinión nos ayuda a mejorar nuestras recetas
+                </p>
+                
+                <div className="flex justify-center mb-6">
+                  <RecipeRating 
+                    recipeId={recipe.id}
+                    size="lg"
+                    onChange={handleRatingChange}
+                  />
+                </div>
+                
+                <div className="flex justify-between">
+                  <Button 
+                    variant="outline" 
+                    onClick={() => setShowRatingModal(false)}
+                  >
+                    Cancelar
+                  </Button>
+                </div>
+              </>
+            ) : (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="flex justify-center"
+              >
+                <div className="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 p-3 rounded-full">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                  </svg>
+                </div>
+              </motion.div>
+            )}
+          </motion.div>
+        </div>
+      )}
     </div>
+  );
+}
+
+// Componente Star para evitar importar lucide-react en la página completa
+function Star({ className, ...props }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      {...props}
+    >
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+    </svg>
   );
 }
