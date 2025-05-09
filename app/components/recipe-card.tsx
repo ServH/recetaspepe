@@ -4,6 +4,7 @@ import { Clock, ChefHat } from 'lucide-react';
 import { Badge } from './ui/badge';
 import { formatTime, getDifficultyColor } from '@/lib/utils';
 import { Recipe } from '@/types/recipe';
+import RecipeRating from './recipe-rating';
 
 interface RecipeCardProps {
   recipe: Recipe;
@@ -36,6 +37,16 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
             >
               {category}
             </Badge>
+          </div>
+          
+          {/* Valoraciones en la parte superior derecha */}
+          <div className="absolute top-3 right-3 z-10 bg-black/30 backdrop-blur-sm rounded-full px-2 py-1">
+            <RecipeRating 
+              recipeId={id} 
+              size="sm" 
+              readOnly={true} 
+              showAverage={true} 
+            />
           </div>
           
           {/* Tiempo e info */}
