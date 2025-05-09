@@ -1,5 +1,5 @@
-import { Suspense } from 'react';
 import Hero from '@/components/hero';
+import { Suspense } from 'react';
 import { RecipeCardSkeleton } from '@/components/ui/skeletons';
 import FeaturedRecipes from '@/components/featured-recipes';
 import CategoryShowcase from '@/components/category-showcase';
@@ -10,7 +10,6 @@ export default function Home() {
       <Hero 
         title="Recetas de Pepe"
         subtitle="Descubre sabores auténticos con nuestras recetas caseras"
-        imageUrl="/images/hero-image.jpg"
       />
       
       <section className="py-12">
