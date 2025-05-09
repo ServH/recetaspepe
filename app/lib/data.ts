@@ -7,7 +7,7 @@ const categories: Category[] = [
     name: "Desayuno",
     slug: "desayuno",
     description: "Recetas deliciosas para empezar el día con energía",
-    image: "https://images.unsplash.com/photo-1533089860892-a9b6be52eff3?q=80&w=640&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1533089860892-a9b6be52eff3?q=80&w=2070",
     count: 2,
   },
   {
@@ -15,7 +15,7 @@ const categories: Category[] = [
     name: "Almuerzo",
     slug: "almuerzo",
     description: "Platos principales para disfrutar en el almuerzo",
-    image: "https://images.unsplash.com/photo-1574484284002-952d92456975?q=80&w=640&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=2070",
     count: 1,
   },
   {
@@ -23,7 +23,7 @@ const categories: Category[] = [
     name: "Cena",
     slug: "cena",
     description: "Cenas ligeras y nutritivas para terminar el día",
-    image: "https://images.unsplash.com/photo-1598866594230-a7c12756260f?q=80&w=640&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?q=80&w=2013",
     count: 1,
   },
   {
@@ -31,9 +31,41 @@ const categories: Category[] = [
     name: "Postres",
     slug: "postres",
     description: "Dulces y postres para cualquier ocasión",
-    image: "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?q=80&w=640&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?q=80&w=2087",
     count: 1,
-  }
+  },
+  {
+    id: "5",
+    name: "Bebidas",
+    slug: "bebidas",
+    description: "Bebidas refrescantes y preparados especiales",
+    image: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=1978",
+    count: 1,
+  },
+  {
+    id: "6",
+    name: "Aperitivos",
+    slug: "aperitivos",
+    description: "Entrantes y aperitivos para compartir",
+    image: "https://images.unsplash.com/photo-1541529086526-db283c563270?q=80&w=2070",
+    count: 1,
+  },
+  {
+    id: "7",
+    name: "Vegetariano",
+    slug: "vegetariano",
+    description: "Platos vegetarianos llenos de sabor",
+    image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=2070",
+    count: 1,
+  },
+  {
+    id: "8",
+    name: "Vegano",
+    slug: "vegano",
+    description: "Recetas veganas nutritivas y sabrosas",
+    image: "https://images.unsplash.com/photo-1604328698692-f76ea9498e76?q=80&w=2070",
+    count: 1,
+  },
 ];
 
 // Recetas de ejemplo
@@ -42,7 +74,7 @@ const recipes: Recipe[] = [
     id: "1",
     title: "Tortilla Española con Cebolla",
     description: "La auténtica tortilla española con un toque dulce gracias a la cebolla caramelizada.",
-    image: "https://images.unsplash.com/photo-1607118750046-da67fd78fea4?q=80&w=640&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1626923725782-9a93b4d5db0a?q=80&w=1974",
     time: 35,
     difficulty: "Media",
     category: "Almuerzo",
@@ -80,7 +112,7 @@ const recipes: Recipe[] = [
     id: "2",
     title: "Pancakes de Avena y Plátano",
     description: "Deliciosos pancakes saludables, perfectos para un desayuno nutritivo.",
-    image: "https://images.unsplash.com/photo-1619052603822-2be8ceacf6be?q=80&w=640&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1554520735-0a6b8b6ce8b7?q=80&w=1964",
     time: 20,
     difficulty: "Fácil",
     category: "Desayuno",
@@ -114,7 +146,7 @@ const recipes: Recipe[] = [
     id: "3",
     title: "Tarta de Chocolate sin Horno",
     description: "Una tarta cremosa y fácil de preparar sin necesidad de horno.",
-    image: "https://images.unsplash.com/photo-1607257891355-fca11286ae60?q=80&w=640&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1615937722923-67f6deaf2cc9?q=80&w=2070",
     time: 30,
     difficulty: "Fácil",
     category: "Postres",
@@ -148,7 +180,7 @@ const recipes: Recipe[] = [
     id: "4",
     title: "Curry de Verduras",
     description: "Un curry vegano reconfortante y nutritivo, perfecto para una cena rápida.",
-    image: "https://images.unsplash.com/photo-1580476262798-bddd9f4b7369?q=80&w=640&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1604246913309-cec7c524066a?q=80&w=2070",
     time: 30,
     difficulty: "Fácil",
     category: "Cena",
@@ -182,6 +214,161 @@ const recipes: Recipe[] = [
     servings: 4,
     createdAt: "2023-09-10T19:15:00Z",
     updatedAt: "2023-10-05T21:30:00Z",
+  },
+  {
+    id: "5",
+    title: "Smoothie Bowl de Frutos Rojos",
+    description: "Un desayuno refrescante, nutritivo y lleno de antioxidantes para empezar el día con energía.",
+    image: "https://images.unsplash.com/photo-1606850780554-b55706813cd4?q=80&w=1974",
+    time: 15,
+    difficulty: "Fácil",
+    category: "Desayuno",
+    tags: ["Vegano", "Sin Gluten", "Saludable"],
+    ingredients: [
+      "1 taza de frutos rojos congelados",
+      "1 plátano maduro",
+      "1/2 taza de leche vegetal",
+      "1 cucharada de semillas de chía",
+      "Toppings: granola, coco rallado, fruta fresca"
+    ],
+    steps: [
+      {
+        id: 1,
+        description: "Añade los frutos rojos congelados, el plátano y la leche vegetal a la batidora.",
+      },
+      {
+        id: 2,
+        description: "Bate hasta conseguir una mezcla cremosa y espesa.",
+      },
+      {
+        id: 3,
+        description: "Sirve en un bol y decora con semillas de chía, granola y otros toppings.",
+      }
+    ],
+    servings: 1,
+    createdAt: "2023-12-01T08:30:00Z",
+    updatedAt: "2023-12-10T10:15:00Z",
+  },
+  {
+    id: "6",
+    title: "Gazpacho Andaluz",
+    description: "Refrescante sopa fría perfecta para los días calurosos de verano, llena de vitaminas y sabor.",
+    image: "https://images.unsplash.com/photo-1597226051193-7d9b9200bb6b?q=80&w=1974",
+    time: 25,
+    difficulty: "Fácil",
+    category: "Aperitivos",
+    tags: ["Español", "Verano", "Vegano"],
+    ingredients: [
+      "1kg de tomates maduros",
+      "1 pepino",
+      "1 pimiento verde",
+      "1 diente de ajo",
+      "100ml de aceite de oliva",
+      "30ml de vinagre",
+      "Sal"
+    ],
+    steps: [
+      {
+        id: 1,
+        description: "Lava y trocea todas las verduras.",
+      },
+      {
+        id: 2,
+        description: "Tritúralas junto con el ajo, aceite, vinagre y sal.",
+      },
+      {
+        id: 3,
+        description: "Pasa por un colador para eliminar las pieles y pepitas.",
+      },
+      {
+        id: 4,
+        description: "Refrigera al menos 2 horas antes de servir.",
+      }
+    ],
+    servings: 4,
+    createdAt: "2023-07-05T15:45:00Z",
+    updatedAt: "2023-07-15T18:20:00Z",
+  },
+  {
+    id: "7",
+    title: "Mojito Refrescante",
+    description: "El cóctel perfecto para cualquier ocasión, refrescante y fácil de preparar.",
+    image: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=1978",
+    time: 10,
+    difficulty: "Fácil",
+    category: "Bebidas",
+    tags: ["Cóctel", "Ron", "Verano"],
+    ingredients: [
+      "50ml de ron blanco",
+      "1 lima",
+      "10 hojas de hierbabuena",
+      "2 cucharadas de azúcar",
+      "Agua con gas",
+      "Hielo"
+    ],
+    steps: [
+      {
+        id: 1,
+        description: "Exprime la lima y trocea en gajos.",
+      },
+      {
+        id: 2,
+        description: "En un vaso alto, machaca las hojas de hierbabuena con el azúcar y el zumo de lima.",
+      },
+      {
+        id: 3,
+        description: "Añade el ron, el hielo y completa con agua con gas.",
+      },
+      {
+        id: 4,
+        description: "Decora con una rodaja de lima y hojas de hierbabuena frescas.",
+      }
+    ],
+    servings: 1,
+    createdAt: "2023-08-20T21:15:00Z",
+    updatedAt: "2023-08-25T14:30:00Z",
+  },
+  {
+    id: "8",
+    title: "Ensalada Mediterránea",
+    description: "Una ensalada fresca y saludable con todos los sabores del Mediterráneo.",
+    image: "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=1974",
+    time: 15,
+    difficulty: "Fácil",
+    category: "Almuerzo",
+    tags: ["Vegetariano", "Saludable", "Mediterráneo"],
+    ingredients: [
+      "Lechuga variada",
+      "200g de queso feta",
+      "1 pepino",
+      "200g de tomates cherry",
+      "1 cebolla roja",
+      "Aceitunas negras",
+      "Orégano",
+      "Aceite de oliva",
+      "Vinagre balsámico"
+    ],
+    steps: [
+      {
+        id: 1,
+        description: "Lava y trocea la lechuga y colócala en una fuente.",
+      },
+      {
+        id: 2,
+        description: "Corta el pepino, los tomates y la cebolla y añádelos a la lechuga.",
+      },
+      {
+        id: 3,
+        description: "Desmenuza el queso feta por encima y agrega las aceitunas.",
+      },
+      {
+        id: 4,
+        description: "Aliña con aceite, vinagre y orégano al gusto.",
+      }
+    ],
+    servings: 2,
+    createdAt: "2023-06-15T12:20:00Z",
+    updatedAt: "2023-06-25T09:45:00Z",
   }
 ];
 
@@ -221,6 +408,12 @@ export function searchRecipes(query: string): Recipe[] {
     recipe.tags.some(tag => tag.toLowerCase().includes(lowerCaseQuery)) ||
     recipe.ingredients.some(ingredient => ingredient.toLowerCase().includes(lowerCaseQuery))
   );
+}
+
+export function getRecentRecipes(): Recipe[] {
+  return [...recipes].sort((a, b) => 
+    new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  ).slice(0, 4);
 }
 
 export function getPopularTags(): { tag: string; count: number }[] {
